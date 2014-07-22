@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+
+<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8" fx:controller="com.airhacks.floyd.presentation.scanner.ScannerPresenter">
+    <children>
+        <TextField fx:id="host" layoutX="40.0" layoutY="28.0" prefHeight="26.0" prefWidth="180.0" promptText="host" />
+        <TextField fx:id="from" layoutX="241.0" layoutY="28.0" prefHeight="26.0" prefWidth="100.0" promptText="port from" />
+        <TextField fx:id="to" layoutX="366.0" layoutY="28.0" prefHeight="26.0" prefWidth="100.0" promptText="port to" />
+        <Button fx:id="scan" layoutX="483.0" layoutY="28.0" mnemonicParsing="false" onAction="#scan" text="Scan" />
+        <ListView fx:id="results" layoutX="40.0" layoutY="75.0" prefHeight="307.0" prefWidth="428.0" />
+    </children>
+</AnchorPane>
