@@ -30,7 +30,7 @@ public class PingScannerIT {
         }
         PingScanner cut = new PingScanner();
         cut.initClient();
-        List<Integer> activePings = cut.activePings("localhost", 5000, 9000);
+        List<Integer> activePings = cut.activePings("localhost", 8000, 8080);
         assertThat(activePings, contains(8080));
 
     }
