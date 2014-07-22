@@ -38,7 +38,7 @@ public class FloydPresenter implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         ScannerView scanner = new ScannerView();
-        scan.getChildren().add(scanner.getView());
+        scanner.getViewAsync(scan.getChildren()::add);
     }
 
 }
