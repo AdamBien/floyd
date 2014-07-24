@@ -32,7 +32,7 @@ public class PingScannerIT {
         PingScanner cut = new PingScanner();
         cut.initClient();
         List<Integer> validPorts = new ArrayList<>();
-        cut.activePings(validPorts::add, "localhost", 8000, 8080);
+        cut.scanForPings(validPorts::add, "localhost", 8000, 8080);
         assertThat(validPorts, contains(8080));
     }
 

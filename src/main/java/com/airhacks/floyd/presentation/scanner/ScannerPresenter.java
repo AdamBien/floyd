@@ -53,6 +53,7 @@ public class ScannerPresenter implements Initializable {
         this.threadPool = Executors.newCachedThreadPool();
         this.scanInProgress = new SimpleBooleanProperty(false);
         progress.visibleProperty().bind(scanInProgress);
+        this.results.setItems(this.ps.getPingUris());
         bindScanValidations();
     }
 
@@ -70,7 +71,7 @@ public class ScannerPresenter implements Initializable {
         Task task = new Task<Void>() {
             @Override
             public Void call() {
-                ps.activePings(ScannerPresenter.this::addActivePort, host.getText(), portFrom, portTo);
+                ps.scanForPings(host.getText(), portFrom, portTo);
                 perform(() -> scanInProgress.set(false));
                 return null;
             }
@@ -81,14 +82,6 @@ public class ScannerPresenter implements Initializable {
 
     void perform(Runnable run) {
         Platform.runLater(run);
-    }
-
-    void addActivePort(int port) {
-        String uri = host.getText() + ":" + port + "/ping";
-        Platform.runLater(
-                () -> results.getItems().add(uri)
-        );
-
     }
 
     private ReadOnlyBooleanProperty isNotNumber(StringProperty textProperty) {
