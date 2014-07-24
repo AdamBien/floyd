@@ -1,7 +1,6 @@
 package com.airhacks.floyd.business.discovery.boundary;
 
-import java.util.List;
-import java.util.stream.Collectors;
+import java.util.function.Consumer;
 import java.util.stream.IntStream;
 import javax.annotation.PostConstruct;
 import javax.ws.rs.client.Client;
@@ -24,12 +23,11 @@ public class PingScanner {
         this.pingTarget = this.client.target("http://{host}:{port}/ping");
     }
 
-    public List<Integer> activePings(String host, int portFrom, int portTo) {
-        return IntStream.range(portFrom, portTo).
+    public void activePings(Consumer<Integer> portConsumer, String host, int portFrom, int portTo) {
+        IntStream.range(portFrom, portTo).
                 parallel().
                 filter(p -> test(host, p)).
-                boxed().
-                collect(Collectors.toList());
+                forEach(portConsumer::accept);
     }
 
     public boolean test(String host, int port) {

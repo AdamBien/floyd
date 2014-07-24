@@ -2,6 +2,7 @@ package com.airhacks.floyd.business.discovery.boundary;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.List;
 import static org.hamcrest.Matchers.contains;
 import static org.junit.Assert.assertThat;
@@ -30,9 +31,9 @@ public class PingScannerIT {
         }
         PingScanner cut = new PingScanner();
         cut.initClient();
-        List<Integer> activePings = cut.activePings("localhost", 8000, 8080);
-        assertThat(activePings, contains(8080));
-
+        List<Integer> validPorts = new ArrayList<>();
+        cut.activePings(validPorts::add, "localhost", 8000, 8080);
+        assertThat(validPorts, contains(8080));
     }
 
 }
