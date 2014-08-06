@@ -80,14 +80,16 @@ public class PingService {
         });
     }
 
-    public void askForOSInfo(String pingUri, Consumer<Double> loadAverage, Consumer<String> errorSink, Runnable doneListener) {
+    public void askForOSInfo(String pingUri, Consumer<Double> loadAverage, Consumer<Integer> numberOfCores, Consumer<String> errorSink, Runnable doneListener) {
         this.client.target(pingUri).path(OS).request().accept(MediaType.APPLICATION_JSON).async().get(new InvocationCallback<JsonObject>() {
 
             @Override
             public void completed(JsonObject rspns) {
                 System.out.println("Response: " + rspns);
-                double available = rspns.getJsonNumber("System Load Average").doubleValue();
-                loadAverage.accept(available);
+                double load = rspns.getJsonNumber("System Load Average").doubleValue();
+                int cores = rspns.getJsonNumber("Available CPUs").intValue();
+                loadAverage.accept(load);
+                numberOfCores.accept(cores);
                 doneListener.run();
             }
 
