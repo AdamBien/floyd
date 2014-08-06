@@ -19,8 +19,9 @@ package com.airhacks.floyd.business.monitor.boundary;
  * limitations under the License.
  * #L%
  */
-import javafx.beans.property.StringProperty;
+import java.util.function.Consumer;
 import javax.annotation.PostConstruct;
+import javax.json.JsonObject;
 import javax.ws.rs.client.Client;
 import javax.ws.rs.client.ClientBuilder;
 import javax.ws.rs.client.InvocationCallback;
@@ -33,6 +34,8 @@ import javax.ws.rs.core.MediaType;
 public class PingService {
 
     private Client client;
+    private static final String START_TIME = "/resources/health/start-time";
+    private static final String MEMORY = "/resources/health/current-memory";
 
     @PostConstruct
     public void init() {
@@ -40,18 +43,38 @@ public class PingService {
         System.out.println("Client created: " + this.client);
     }
 
-    public void askForUptime(String serverUrl, StringProperty sink, StringProperty errorSink) {
-        this.client.target(serverUrl).request().accept(MediaType.TEXT_PLAIN).async().get(new InvocationCallback<String>() {
+    public void askForUptime(String pingUri, Consumer<String> sink, Consumer<String> errorSink) {
+        this.client.target(pingUri).path(START_TIME).request().accept(MediaType.TEXT_PLAIN).async().get(new InvocationCallback<String>() {
 
             @Override
             public void completed(String rspns) {
-                sink.set(rspns);
+                sink.accept(rspns);
             }
 
             @Override
             public void failed(Throwable thrwbl) {
-                errorSink.set(thrwbl.getMessage());
+                errorSink.accept(thrwbl.getMessage());
             }
         });
     }
+
+    public void askForMemory(String pingUri, Consumer<Double> availableProperty, Consumer<Double> usedProperty, Consumer<String> errorSink) {
+        this.client.target(pingUri).path(MEMORY).request().accept(MediaType.APPLICATION_JSON).async().get(new InvocationCallback<JsonObject>() {
+
+            @Override
+            public void completed(JsonObject rspns) {
+                System.out.println("Response: " + rspns);
+                double available = rspns.getJsonNumber("Available memory in mb").doubleValue();
+                double used = rspns.getJsonNumber("Used memory in mb").doubleValue();
+                availableProperty.accept(available);
+                usedProperty.accept(used);
+            }
+
+            @Override
+            public void failed(Throwable thrwbl) {
+                errorSink.accept(thrwbl.getMessage());
+            }
+        });
+    }
+
 }

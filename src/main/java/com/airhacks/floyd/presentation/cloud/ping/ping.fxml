@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.chart.*?>
 <?import java.lang.*?>
 <?import java.net.*?>
 <?import java.util.*?>
@@ -8,8 +9,16 @@
 <?import javafx.scene.input.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane id="AnchorPane" minHeight="180.0" prefHeight="192.0" prefWidth="525.0" styleClass="airpad" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.airhacks.floyd.presentation.cloud.ping.PingPresenter">
+<AnchorPane id="AnchorPane" minHeight="180.0" prefHeight="273.0" prefWidth="525.0" styleClass="airpad" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.airhacks.floyd.presentation.cloud.ping.PingPresenter">
     <children>
-        <Label fx:id="pingUri" layoutX="141.0" layoutY="51.0" prefHeight="39.0" prefWidth="303.0" text="ping" />
+      <BarChart fx:id="memoryChart" layoutX="14.0" layoutY="21.0" prefHeight="150.0" prefWidth="162.0" title="Heap">
+        <xAxis>
+          <CategoryAxis fx:id="category" side="BOTTOM" />
+        </xAxis>
+        <yAxis>
+          <NumberAxis fx:id="number" autoRanging="false" label="MB" side="LEFT" />
+        </yAxis>
+      </BarChart>
+      <Label fx:id="errorSink" layoutX="40.0" layoutY="229.0" prefHeight="16.0" prefWidth="377.0" />
     </children>
 </AnchorPane>
