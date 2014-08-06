@@ -7,7 +7,6 @@ import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.chart.BarChart;
-import javafx.scene.chart.CategoryAxis;
 import javafx.scene.chart.NumberAxis;
 import javafx.scene.chart.XYChart;
 import javafx.scene.control.Label;
@@ -29,32 +28,53 @@ public class PingPresenter implements Initializable {
     PingService service;
 
     @FXML
-    NumberAxis number;
+    NumberAxis memoryNumberAxis;
 
     @FXML
-    CategoryAxis category;
+    NumberAxis loadNumberAxis;
+
+    @FXML
+    BarChart loadAverageChart;
 
     @FXML
     BarChart memoryChart;
 
-    private XYChart.Series<String, Number> series;
+    private XYChart.Series<String, Number> memorySeries;
+    private XYChart.Series<String, Number> loadSeries;
     private long counter;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        this.series = new XYChart.Series<>();
-        memoryChart.getData().add(series);
+        this.memorySeries = new XYChart.Series<>();
+        this.loadSeries = new XYChart.Series<>();
+        memoryChart.getData().add(memorySeries);
+        loadAverageChart.getData().add(loadSeries);
         refresh();
     }
 
     public void refresh() {
+        this.refreshMemory();
+        this.refreshLoadAverage();
+        counter++;
+    }
+
+    public void refreshLoadAverage() {
         XYChart.Data<String, Number> point = new XYChart.Data<>();
         point.setXValue(String.valueOf(counter));
         Runnable doneListener = () -> {
-            Platform.runLater(() -> series.getData().add(point));
+            Platform.runLater(() -> loadSeries.getData().add(point));
         };
-        service.askForMemory("http://" + uri, number.upperBoundProperty()::set, point::setYValue, errorSink::setText, doneListener);
-        counter++;
+        service.askForOSInfo("http://" + uri, point::setYValue, errorSink::setText, doneListener);
+
+    }
+
+    public void refreshMemory() {
+        XYChart.Data<String, Number> point = new XYChart.Data<>();
+        point.setXValue(String.valueOf(counter));
+        Runnable doneListener = () -> {
+            Platform.runLater(() -> memorySeries.getData().add(point));
+        };
+        service.askForMemory("http://" + uri, memoryNumberAxis.upperBoundProperty()::set, point::setYValue, errorSink::setText, doneListener);
 
     }
 

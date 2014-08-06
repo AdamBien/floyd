@@ -36,6 +36,7 @@ public class PingService {
     private Client client;
     private static final String START_TIME = "/resources/health/start-time";
     private static final String MEMORY = "/resources/health/current-memory";
+    private static final String OS = "/resources/health/os-info";
 
     @PostConstruct
     public void init() {
@@ -69,6 +70,24 @@ public class PingService {
                 double used = rspns.getJsonNumber("Used memory in mb").doubleValue();
                 availableProperty.accept(available);
                 usedProperty.accept(used);
+                doneListener.run();
+            }
+
+            @Override
+            public void failed(Throwable thrwbl) {
+                errorSink.accept(thrwbl.getMessage());
+            }
+        });
+    }
+
+    public void askForOSInfo(String pingUri, Consumer<Double> loadAverage, Consumer<String> errorSink, Runnable doneListener) {
+        this.client.target(pingUri).path(OS).request().accept(MediaType.APPLICATION_JSON).async().get(new InvocationCallback<JsonObject>() {
+
+            @Override
+            public void completed(JsonObject rspns) {
+                System.out.println("Response: " + rspns);
+                double available = rspns.getJsonNumber("System Load Average").doubleValue();
+                loadAverage.accept(available);
                 doneListener.run();
             }
 

@@ -11,15 +11,23 @@
 
 <AnchorPane id="AnchorPane" minHeight="180.0" prefHeight="273.0" prefWidth="525.0" styleClass="airpad" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.airhacks.floyd.presentation.cloud.ping.PingPresenter">
     <children>
-      <BarChart fx:id="memoryChart" layoutX="14.0" layoutY="21.0" prefHeight="150.0" prefWidth="162.0" title="Heap">
-        <xAxis>
-          <CategoryAxis fx:id="category" side="BOTTOM" />
-        </xAxis>
-        <yAxis>
-          <NumberAxis fx:id="number" autoRanging="false" label="MB" side="LEFT" />
-        </yAxis>
-      </BarChart>
-      <Label fx:id="errorSink" layoutX="40.0" layoutY="229.0" prefHeight="16.0" prefWidth="377.0" />
-      <Button layoutX="40.0" layoutY="224.0" mnemonicParsing="false" onAction="#refresh" text="Refresh" />
+        <BarChart fx:id="memoryChart" layoutX="14.0" layoutY="21.0" prefHeight="150.0" prefWidth="162.0" title="Heap">
+            <xAxis>
+                <CategoryAxis fx:id="memoryCategoryAxis" side="BOTTOM" />
+            </xAxis>
+            <yAxis>
+                <NumberAxis fx:id="memoryNumberAxis" autoRanging="false" label="MB" side="LEFT" tickMarkVisible="false" />
+            </yAxis>
+        </BarChart>
+        <BarChart fx:id="loadAverageChart" layoutX="236.0" layoutY="21.0" prefHeight="150.0" prefWidth="162.0" title="Load Average">
+            <xAxis>
+                <CategoryAxis fx:id="loadCategoryAxis" side="BOTTOM" />
+            </xAxis>
+            <yAxis>
+                <NumberAxis fx:id="loadNumberAxis" label="Load" side="LEFT" upperBound="10.0" />
+            </yAxis>
+        </BarChart>
+        <Label fx:id="errorSink" layoutX="40.0" layoutY="229.0" prefHeight="16.0" prefWidth="377.0" />
+        <Button layoutX="40.0" layoutY="224.0" mnemonicParsing="false" onAction="#refresh" text="Refresh" />
     </children>
 </AnchorPane>
