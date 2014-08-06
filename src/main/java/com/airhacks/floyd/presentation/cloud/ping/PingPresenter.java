@@ -4,7 +4,6 @@ import com.airhacks.floyd.business.monitor.boundary.PingService;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.application.Platform;
-import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.chart.BarChart;
@@ -44,13 +43,12 @@ public class PingPresenter implements Initializable {
     public void initialize(URL location, ResourceBundle resources) {
         point = new XYChart.Data<>();
         point.setXValue("1");
-        service.askForMemory("http://" + uri, number.upperBoundProperty()::set, point::setYValue, errorSink::setText);
-
-        point.YValueProperty().addListener((ObservableValue<? extends Number> observable, Number oldValue, Number newValue) -> {
+        Runnable doneListener = () -> {
             XYChart.Series<String, Number> series = new XYChart.Series<>();
             series.getData().add(point);
             Platform.runLater(() -> memoryChart.getData().add(series));
-        });
+        };
+        service.askForMemory("http://" + uri, number.upperBoundProperty()::set, point::setYValue, errorSink::setText, doneListener);
 
     }
 

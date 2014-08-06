@@ -27,7 +27,8 @@ public class PingServiceIT {
     public void errorOnMalformedUri() throws InterruptedException {
         StringProperty content = new SimpleStringProperty();
         StringProperty error = new SimpleStringProperty();
-        this.cut.askForUptime("Malformed", content::set, error::set);
+        this.cut.askForUptime("Malformed", content::set, error::set, () -> {
+        });
         CountDownLatch countDownLatch = new CountDownLatch(1);
         countDownLatch.await(3, TimeUnit.SECONDS);
         error.addListener(l -> countDownLatch.countDown());

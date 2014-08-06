@@ -43,12 +43,13 @@ public class PingService {
         System.out.println("Client created: " + this.client);
     }
 
-    public void askForUptime(String pingUri, Consumer<String> sink, Consumer<String> errorSink) {
+    public void askForUptime(String pingUri, Consumer<String> sink, Consumer<String> errorSink, Runnable doneListener) {
         this.client.target(pingUri).path(START_TIME).request().accept(MediaType.TEXT_PLAIN).async().get(new InvocationCallback<String>() {
 
             @Override
             public void completed(String rspns) {
                 sink.accept(rspns);
+                doneListener.run();
             }
 
             @Override
@@ -58,7 +59,7 @@ public class PingService {
         });
     }
 
-    public void askForMemory(String pingUri, Consumer<Double> availableProperty, Consumer<Double> usedProperty, Consumer<String> errorSink) {
+    public void askForMemory(String pingUri, Consumer<Double> availableProperty, Consumer<Double> usedProperty, Consumer<String> errorSink, Runnable doneListener) {
         this.client.target(pingUri).path(MEMORY).request().accept(MediaType.APPLICATION_JSON).async().get(new InvocationCallback<JsonObject>() {
 
             @Override
@@ -68,6 +69,7 @@ public class PingService {
                 double used = rspns.getJsonNumber("Used memory in mb").doubleValue();
                 availableProperty.accept(available);
                 usedProperty.accept(used);
+                doneListener.run();
             }
 
             @Override
