@@ -1,6 +1,5 @@
-package com.airhacks.floyd.presentation.cloud.ping;
+package com.airhacks.floyd.cloud.ping;
 
-import com.airhacks.floyd.business.monitor.boundary.PingService;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.application.Platform;

@@ -1,4 +1,4 @@
-package com.airhacks.floyd.presentation.cloud;
+package com.airhacks.floyd.cloud;
 
 import com.airhacks.afterburner.views.FXMLView;
 

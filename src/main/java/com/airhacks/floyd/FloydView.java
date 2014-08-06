@@ -1,4 +1,4 @@
-package com.airhacks.floyd.presentation;
+package com.airhacks.floyd;
 
 /*
  * #%L

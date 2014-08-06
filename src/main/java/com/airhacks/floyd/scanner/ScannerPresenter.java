@@ -1,6 +1,5 @@
-package com.airhacks.floyd.presentation.scanner;
+package com.airhacks.floyd.scanner;
 
-import com.airhacks.floyd.business.discovery.boundary.PingScanner;
 import java.net.URL;
 import java.util.ResourceBundle;
 import java.util.concurrent.ExecutorService;

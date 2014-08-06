@@ -1,4 +1,4 @@
-package com.airhacks.floyd.presentation;
+package com.airhacks.floyd;
 
 /*
  * #%L
@@ -19,8 +19,8 @@ package com.airhacks.floyd.presentation;
  * limitations under the License.
  * #L%
  */
-import com.airhacks.floyd.presentation.cloud.CloudView;
-import com.airhacks.floyd.presentation.scanner.ScannerView;
+import com.airhacks.floyd.cloud.CloudView;
+import com.airhacks.floyd.scanner.ScannerView;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.fxml.FXML;

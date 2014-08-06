@@ -1,4 +1,4 @@
-package com.airhacks.floyd.presentation.cloud.ping;
+package com.airhacks.floyd.cloud.ping;
 
 import com.airhacks.afterburner.views.FXMLView;
 import java.util.function.Function;

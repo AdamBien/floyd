@@ -1,5 +1,6 @@
-package com.airhacks.floyd.business.monitor.boundary;
+package com.airhacks.floyd.presentation.cloud.ping;
 
+import com.airhacks.floyd.cloud.ping.PingService;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.TimeUnit;
 import javafx.beans.property.SimpleStringProperty;

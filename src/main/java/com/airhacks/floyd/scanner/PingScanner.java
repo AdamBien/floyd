@@ -1,4 +1,4 @@
-package com.airhacks.floyd.business.discovery.boundary;
+package com.airhacks.floyd.scanner;
 
 import java.util.function.Consumer;
 import java.util.stream.IntStream;

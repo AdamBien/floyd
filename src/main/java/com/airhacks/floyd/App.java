@@ -20,7 +20,6 @@ package com.airhacks.floyd;
  * #L%
  */
 import com.airhacks.afterburner.injection.Injector;
-import com.airhacks.floyd.presentation.FloydView;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.stage.Stage;

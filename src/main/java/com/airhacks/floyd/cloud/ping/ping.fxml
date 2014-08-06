@@ -9,7 +9,7 @@
 <?import javafx.scene.input.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane id="AnchorPane" minHeight="180.0" prefHeight="347.0" prefWidth="525.0" styleClass="airpad" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.airhacks.floyd.presentation.cloud.ping.PingPresenter">
+<AnchorPane id="AnchorPane" minHeight="180.0" prefHeight="347.0" prefWidth="525.0" styleClass="airpad" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.airhacks.floyd.cloud.ping.PingPresenter">
     <children>
         <BarChart fx:id="memoryChart" horizontalGridLinesVisible="false" layoutX="14.0" layoutY="62.0" prefHeight="150.0" prefWidth="162.0" title="Heap">
             <xAxis>
@@ -29,8 +29,8 @@
         </BarChart>
         <Label fx:id="errorSink" layoutX="40.0" layoutY="309.0" prefHeight="16.0" prefWidth="377.0" />
         <Button layoutX="44.0" layoutY="261.0" mnemonicParsing="false" onAction="#refresh" text="Refresh" />
-      <Label fx:id="upTime" layoutX="29.0" layoutY="25.0" prefHeight="16.0" prefWidth="432.0" />
-      <Label layoutX="40.0" layoutY="212.0" text="CPUs:" />
-      <Label fx:id="cores" layoutX="97.0" layoutY="212.0" prefHeight="16.0" prefWidth="79.0" />
+        <Label fx:id="upTime" layoutX="29.0" layoutY="25.0" prefHeight="16.0" prefWidth="432.0" />
+        <Label layoutX="40.0" layoutY="212.0" text="CPUs:" />
+        <Label fx:id="cores" layoutX="97.0" layoutY="212.0" prefHeight="16.0" prefWidth="79.0" />
     </children>
 </AnchorPane>

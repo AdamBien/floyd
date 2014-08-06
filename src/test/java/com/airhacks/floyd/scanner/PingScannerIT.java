@@ -1,4 +1,4 @@
-package com.airhacks.floyd.business.discovery.boundary;
+package com.airhacks.floyd.scanner;
 
 import java.io.IOException;
 import java.net.URL;

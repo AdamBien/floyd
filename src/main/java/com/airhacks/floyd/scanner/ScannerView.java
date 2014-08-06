@@ -1,4 +1,4 @@
-package com.airhacks.floyd.presentation.scanner;
+package com.airhacks.floyd.scanner;
 
 import com.airhacks.afterburner.views.FXMLView;
 

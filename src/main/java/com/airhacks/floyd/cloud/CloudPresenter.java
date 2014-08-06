@@ -1,7 +1,7 @@
-package com.airhacks.floyd.presentation.cloud;
+package com.airhacks.floyd.cloud;
 
-import com.airhacks.floyd.business.discovery.boundary.PingScanner;
-import com.airhacks.floyd.presentation.cloud.ping.PingView;
+import com.airhacks.floyd.scanner.PingScanner;
+import com.airhacks.floyd.cloud.ping.PingView;
 import java.net.URL;
 import java.util.HashMap;
 import java.util.List;

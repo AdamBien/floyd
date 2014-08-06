@@ -1,4 +1,4 @@
-package com.airhacks.floyd.business.monitor.boundary;
+package com.airhacks.floyd.cloud.ping;
 
 /*
  * #%L
