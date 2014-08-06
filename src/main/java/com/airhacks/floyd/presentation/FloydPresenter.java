@@ -46,5 +46,4 @@ public class FloydPresenter implements Initializable {
         CloudView cloudy = new CloudView();
         cloudy.getViewAsync(active.getChildren()::add);
     }
-
 }

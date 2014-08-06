@@ -15,7 +15,6 @@ import javafx.concurrent.Task;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
-import javafx.scene.control.ListView;
 import javafx.scene.control.ProgressIndicator;
 import javafx.scene.control.TextField;
 import javax.inject.Inject;
@@ -32,8 +31,6 @@ public class ScannerPresenter implements Initializable {
     TextField from;
     @FXML
     TextField to;
-    @FXML
-    ListView<String> results;
 
     @FXML
     Button scan;
@@ -53,7 +50,6 @@ public class ScannerPresenter implements Initializable {
         this.threadPool = Executors.newCachedThreadPool();
         this.scanInProgress = new SimpleBooleanProperty(false);
         progress.visibleProperty().bind(scanInProgress);
-        this.results.setItems(this.ps.getActivePings());
         bindScanValidations();
     }
 

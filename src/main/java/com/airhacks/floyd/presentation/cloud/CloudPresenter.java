@@ -1,14 +1,18 @@
 package com.airhacks.floyd.presentation.cloud;
 
 import com.airhacks.floyd.business.discovery.boundary.PingScanner;
+import com.airhacks.floyd.presentation.cloud.ping.PingView;
 import java.net.URL;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.ResourceBundle;
 import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.ListView;
+import javafx.scene.control.Tab;
+import javafx.scene.control.TabPane;
 import javax.inject.Inject;
 
 /**
@@ -21,7 +25,7 @@ public class CloudPresenter implements Initializable {
     PingScanner ps;
 
     @FXML
-    ListView activePings;
+    TabPane activePings;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -34,6 +38,16 @@ public class CloudPresenter implements Initializable {
     }
 
     void openPingViews(List<String> uri) {
-        uri.forEach(activePings.getItems()::add);
+        uri.forEach(this::add);
     }
+
+    public void add(String uri) {
+        Tab tab = new Tab(uri);
+        Map<String, Object> context = new HashMap<>();
+        context.put("uri", uri);
+        PingView view = new PingView(context::get);
+        view.getViewAsync(tab::setContent);
+        activePings.getTabs().add(tab);
+    }
+
 }
