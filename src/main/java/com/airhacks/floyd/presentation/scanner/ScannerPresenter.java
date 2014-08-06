@@ -53,7 +53,7 @@ public class ScannerPresenter implements Initializable {
         this.threadPool = Executors.newCachedThreadPool();
         this.scanInProgress = new SimpleBooleanProperty(false);
         progress.visibleProperty().bind(scanInProgress);
-        this.results.setItems(this.ps.getPingUris());
+        this.results.setItems(this.ps.getActivePings());
         bindScanValidations();
     }
 

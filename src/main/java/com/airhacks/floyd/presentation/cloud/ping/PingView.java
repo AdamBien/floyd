@@ -1,4 +1,4 @@
-package com.airhacks.floyd.presentation.monitor.pings;
+package com.airhacks.floyd.presentation.cloud.ping;
 
 import com.airhacks.afterburner.views.FXMLView;
 

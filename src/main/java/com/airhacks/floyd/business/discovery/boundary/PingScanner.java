@@ -44,7 +44,7 @@ public class PingScanner {
         Platform.runLater(() -> validUris.add(buildUri(host, port)));
     }
 
-    public ObservableList<String> getPingUris() {
+    public ObservableList<String> getActivePings() {
         return this.validUris;
     }
 
@@ -58,7 +58,7 @@ public class PingScanner {
         }
     }
 
-    static String buildUri(String host, int value) {
-        return host + value + "/ping";
+    static String buildUri(String host, int port) {
+        return host + ":" + port + "/ping";
     }
 }

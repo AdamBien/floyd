@@ -19,6 +19,7 @@ package com.airhacks.floyd.presentation;
  * limitations under the License.
  * #L%
  */
+import com.airhacks.floyd.presentation.cloud.CloudView;
 import com.airhacks.floyd.presentation.scanner.ScannerView;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -35,10 +36,15 @@ public class FloydPresenter implements Initializable {
     @FXML
     AnchorPane scan;
 
+    @FXML
+    AnchorPane active;
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         ScannerView scanner = new ScannerView();
         scanner.getViewAsync(scan.getChildren()::add);
+        CloudView cloudy = new CloudView();
+        cloudy.getViewAsync(active.getChildren()::add);
     }
 
 }

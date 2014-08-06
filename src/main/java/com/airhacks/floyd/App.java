@@ -35,7 +35,7 @@ public class App extends Application {
     public void start(Stage stage) throws Exception {
         FloydView appView = new FloydView();
         Scene scene = new Scene(appView.getView());
-        stage.setTitle("floyd.fx v1.0-SNAPSHOT");
+        stage.setTitle("floyd.fx v0.0.1-SNAPSHOT");
         final String uri = getClass().getResource("app.css").toExternalForm();
         scene.getStylesheets().add(uri);
         stage.setScene(scene);
