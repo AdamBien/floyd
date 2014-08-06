@@ -20,5 +20,6 @@
         </yAxis>
       </BarChart>
       <Label fx:id="errorSink" layoutX="40.0" layoutY="229.0" prefHeight="16.0" prefWidth="377.0" />
+      <Button layoutX="40.0" layoutY="224.0" mnemonicParsing="false" onAction="#refresh" text="Refresh" />
     </children>
 </AnchorPane>

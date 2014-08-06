@@ -37,18 +37,24 @@ public class PingPresenter implements Initializable {
     @FXML
     BarChart memoryChart;
 
-    private XYChart.Data<String, Number> point;
+    private XYChart.Series<String, Number> series;
+    private long counter;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        point = new XYChart.Data<>();
-        point.setXValue("1");
+        this.series = new XYChart.Series<>();
+        memoryChart.getData().add(series);
+        refresh();
+    }
+
+    public void refresh() {
+        XYChart.Data<String, Number> point = new XYChart.Data<>();
+        point.setXValue(String.valueOf(counter));
         Runnable doneListener = () -> {
-            XYChart.Series<String, Number> series = new XYChart.Series<>();
-            series.getData().add(point);
-            Platform.runLater(() -> memoryChart.getData().add(series));
+            Platform.runLater(() -> series.getData().add(point));
         };
         service.askForMemory("http://" + uri, number.upperBoundProperty()::set, point::setYValue, errorSink::setText, doneListener);
+        counter++;
 
     }
 
