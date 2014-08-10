@@ -23,7 +23,7 @@ limitations under the License.
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.airhacks</groupId>
     <artifactId>floyd</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
+    <version>0.0.1</version>
     <packaging>jar</packaging>
     <name>floyd</name>
     <url>http://airhacks.com</url>
@@ -135,7 +135,7 @@ limitations under the License.
         <connection>scm:git:git@github.com:AdamBien/floyd.git</connection>
         <url>scm:git:git@github.com:AdamBien/floyd.git</url>
         <developerConnection>scm:git:git@github.com:AdamBien/floyd.git</developerConnection>
-        <tag>HEAD</tag>
+        <tag>v0.0.1</tag>
     </scm>
     <properties>
         <maven.compiler.source>1.8</maven.compiler.source>
