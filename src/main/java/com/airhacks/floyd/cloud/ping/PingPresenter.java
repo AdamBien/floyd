@@ -4,7 +4,9 @@ import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.application.Platform;
 import javafx.beans.property.IntegerProperty;
+import javafx.beans.property.LongProperty;
 import javafx.beans.property.SimpleIntegerProperty;
+import javafx.beans.property.SimpleLongProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 import javafx.fxml.FXML;
@@ -43,6 +45,12 @@ public class PingPresenter implements Initializable {
     BarChart memoryChart;
 
     @FXML
+    BarChart pingTimeChart;
+
+    @FXML
+    NumberAxis pingNumberAxis;
+
+    @FXML
     Label upTime;
 
     @FXML
@@ -50,14 +58,17 @@ public class PingPresenter implements Initializable {
 
     private XYChart.Series<String, Number> memorySeries;
     private XYChart.Series<String, Number> loadSeries;
+    private XYChart.Series<String, Number> pingSeries;
     private long counter;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         this.memorySeries = new XYChart.Series<>();
         this.loadSeries = new XYChart.Series<>();
+        this.pingSeries = new XYChart.Series<>();
         memoryChart.getData().add(memorySeries);
         loadAverageChart.getData().add(loadSeries);
+        pingTimeChart.getData().add(pingSeries);
         refresh();
     }
 
@@ -65,6 +76,7 @@ public class PingPresenter implements Initializable {
         this.refreshMemory();
         this.refreshOsInfo();
         this.refreshUpTime();
+        this.refreshPingTime();
         counter++;
     }
 
@@ -80,6 +92,23 @@ public class PingPresenter implements Initializable {
             });
         };
         service.askForOSInfo("http://" + uri, point::setYValue, upTimeProperty::set, errorSink::setText, doneListener);
+
+    }
+
+    public void refreshPingTime() {
+        XYChart.Data<String, Number> point = new XYChart.Data<>();
+        point.setXValue(String.valueOf(counter));
+        LongProperty responseTime = new SimpleLongProperty();
+
+        Runnable doneListener = () -> {
+            Platform.runLater(() -> {
+                final long timeInMs = responseTime.get();
+                System.out.println("Ping time: " + timeInMs);
+                point.setYValue(timeInMs);
+                pingSeries.getData().add(point);
+            });
+        };
+        service.ping("http://" + uri, responseTime::set, errorSink::setText, doneListener);
 
     }
 

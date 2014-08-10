@@ -37,6 +37,7 @@ public class PingService {
     private static final String START_TIME = "/resources/health/start-time";
     private static final String MEMORY = "/resources/health/current-memory";
     private static final String OS = "/resources/health/os-info";
+    private static final String PING = "/resources/pings/echo";
 
     @PostConstruct
     public void init() {
@@ -56,6 +57,8 @@ public class PingService {
             @Override
             public void failed(Throwable thrwbl) {
                 errorSink.accept(thrwbl.getMessage());
+                doneListener.run();
+
             }
         });
     }
@@ -76,6 +79,8 @@ public class PingService {
             @Override
             public void failed(Throwable thrwbl) {
                 errorSink.accept(thrwbl.getMessage());
+                doneListener.run();
+
             }
         });
     }
@@ -96,8 +101,32 @@ public class PingService {
             @Override
             public void failed(Throwable thrwbl) {
                 errorSink.accept(thrwbl.getMessage());
+                doneListener.run();
             }
         });
+    }
+
+    public void ping(String pingUri, Consumer<Long> responseTime, Consumer<String> errorSink, Runnable doneListener) {
+        long startTime = System.currentTimeMillis();
+        this.client.target(pingUri).path(PING).path(String.valueOf(startTime)).
+                request().async().
+                get(
+                        new InvocationCallback<String>() {
+
+                            @Override
+                            public void completed(String rspns) {
+                                responseTime.accept(System.currentTimeMillis() - startTime);
+                                doneListener.run();
+                                System.out.println("Response: " + rspns);
+                            }
+
+                            @Override
+                            public void failed(Throwable thrwbl) {
+                                errorSink.accept(thrwbl.getMessage());
+                                doneListener.run();
+                            }
+                        });
+
     }
 
 }
