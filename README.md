@@ -1,9 +1,9 @@
 floyd
 ===========
-Visualization of ping services running on different hosts / ports.
+Visualization of [ping](https://github.com/AdamBien/ping) services running on different hosts / ports.
 
-Usage: java -jar ping-app.jar
+Usage: java -jar floyd-app.jar
 
 Floyd requires Java 8.
 
-Scans and visualizes: [ping](https://github.com/AdamBien/ping) services.
+See also: [ping](https://github.com/AdamBien/ping).
