@@ -131,6 +131,12 @@ limitations under the License.
             </resource>
         </resources>
     </build>
+    <scm>
+        <connection>scm:git:git@github.com:AdamBien/floyd.git</connection>
+        <url>scm:git:git@github.com:AdamBien/floyd.git</url>
+        <developerConnection>scm:git:git@github.com:AdamBien/floyd.git</developerConnection>
+        <tag>HEAD</tag>
+    </scm>
     <properties>
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
