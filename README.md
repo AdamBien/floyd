@@ -8,4 +8,4 @@ Floyd requires Java 8.
 
 See also: [ping](https://github.com/AdamBien/ping).
 
-floyd is a [afterburner.fx](https://github.com/AdamBien/afterburner.fx) project.
+floyd is an [afterburner.fx](https://github.com/AdamBien/afterburner.fx) project.
